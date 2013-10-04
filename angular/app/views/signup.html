@@ -1,0 +1,42 @@
+<div class="row-fluid">
+    <div class="dialog">
+        <div class="block">
+            <p class="block-heading">
+                Sign Up
+            </p>
+            <div class="block-body">
+                <form name='addUserForm'>
+                    <label>
+                        Email Address {{test}}
+                    </label>
+                    <input type="email" class="span12" ng-model='user.email' required>
+                    <label>
+                        Username
+                    </label>
+                    <input type="text" class="span12" ng-model='user.name' ng-maxlength='15' ng-min='1' required>
+                    <label>
+                        Password  {{message}}
+                    </label>
+                    <input type="password" class="span12" ng-model='user.passwd' ng-maxlength='25' ng-min='6' required>
+                    <div><button ng-click='signUp()' ng-disabled='!addUserForm.$valid' class="btn btn-primary pull-right"> 
+                        Sign Up!
+                    </button></div>
+                    <label class="remember-me">
+                        <input type="checkbox">
+                        I agree with the
+                        <a href="terms-and-conditions.html">
+                            Terms and Conditions
+                        </a>
+                    </label>
+                    <div class="clearfix">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <p>
+            <a href="privacy-policy.html">
+                Privacy Policy
+            </a>
+        </p>
+    </div>
+</div>

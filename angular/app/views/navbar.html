@@ -1,0 +1,60 @@
+<div ng-controller="NavbarCtrl" class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav pull-right">
+      <li ng-show="!global.isLogin">
+       <a href="#signin" class="hidden-phone visible-tablet visible-desktop" role="button">
+            SignIn
+        </a>
+      </li>
+      <li ng-show="!global.isLogin">
+       <a href="#signup" class="hidden-phone visible-tablet visible-desktop" role="button">
+            SignUp
+        </a>
+      </li>
+
+      <li ng-show="global.isLogin">
+        <a href="#" class="hidden-phone visible-tablet visible-desktop" role="button">
+            Settings
+        </a>
+      </li>
+      <li ng-show="global.isLogin" id="fat-menu" class="dropdown">
+        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-user">
+          </i>
+          {{global.user.name}} 
+          <i class="icon-caret-down">
+          </i>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a tabindex="-1" href="#">
+              My Account
+            </a>
+          </li>
+          <li class="divider">
+          </li>
+          <li>
+            <a tabindex="-1" class="visible-phone" href="#">
+              Settings
+            </a>
+          </li>
+          <li class="divider visible-phone">
+          </li>
+          <li>
+            <a tabindex="-1" href="/auth/signout">
+              Logout
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <a class="brand" href="index.html">
+      <span class="first">
+        Wechat
+      </span>
+      <span class="second">
+        Admin
+      </span>
+    </a>
+  </div>
+</div>

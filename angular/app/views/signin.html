@@ -1,0 +1,36 @@
+<div class="row-fluid">
+    <div class="dialog">
+        <div class="block">
+            <p class="block-heading">
+                Sign In
+            </p>
+            <div class="block-body">
+                <form name='signinForm'>
+                    <label>
+                        Username
+                    </label>
+                    <input type="text" ng-model='user.name' class="span12" required>
+                    <label>
+                        Password
+                    </label>
+                    <input type="password" ng-model='user.passwd' class="span12" required>
+                    <div><button ng-click='signIn()' ng-disabled='!signinForm.$valid' class="btn btn-primary pull-right">
+                        Sign In
+                    </button></div>
+                    <label class="remember-me">
+                        <input type="checkbox">
+                        Remember me
+                    </label>
+                    <div class="clearfix">
+                    </div>
+                </form>
+            </div>
+        </div>
+        </p>
+        <p>
+            <a href="reset-password.html">
+                Forgot your password?
+            </a>
+        </p>
+    </div>
+</div>
