@@ -6,6 +6,9 @@
  *
  */
 
+var crypto = require('crypto');
+var hat = require('hat');
+
 module.exports = {
 
   attributes: {
@@ -35,7 +38,26 @@ module.exports = {
     return obj;
    }
 
+  },
+
+
+  // Lifecycle Callbacks
+  afterCreate: function(user, next) {
     
+    var auth_token = user.id + '\t' + user.name + '\t' + user.email + '\t' + user.passwd; 
+    var mpid = crypto.createHash('md5').update(auth_token).digest('hex');
+    var token = hat();    
+
+    var newAccess = {
+        mpid: mpid,
+        token: token,
+        user_id: user.id
+    }
+    Access.create(newAccess)
+    .done(function(err, access){
+        if(err) return next(err);
+        next();
+    }); 
   }
 
 };
