@@ -17,16 +17,19 @@ module.exports.policies = {
   // Default policy for all controllers and actions
   // (`true` allows public access) 
  // '*': true
-    '*': 'authenticated',
-    
-    AuthController: {
-        '*': true
+    '*': false,
+
+    RuleController: {
+        '*': false,
+        'create': 'isEditor',
+        'update': 'isEditor',
+        'find': 'isEditor'  
     },
 
-    WechatController: {
-        '*': true
+    AuthController: {
+        '*': true 
     }
-    /*
+        /*
 	// Here's an example of adding some policies to a controller
 	RabbitController: {
 

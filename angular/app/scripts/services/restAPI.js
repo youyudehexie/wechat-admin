@@ -11,5 +11,6 @@ services.factory('restAPI', function ($resource, $q) {
     var restAPI = {};
     restAPI.auth = $resource('/auth/:OP');
     restAPI.user = $resource('/user/:OP');
+    restAPI.rule = $resource('/rule/:OP');
     return restAPI; 
 });

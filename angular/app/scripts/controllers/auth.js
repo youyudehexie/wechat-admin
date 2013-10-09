@@ -2,17 +2,6 @@
 
 angular.module('wechatAdminApp')
   .controller('AuthCtrl', function ($scope, $rootScope, $location, restAPI) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-
-    $scope.test = 'fuck this'
-
-    $scope.addUser = function(){
-       $scope.message = 'this is message ' + $scope.user.email; 
-    }
 
     $scope.signIn = function() {
       var Auth = restAPI.auth; 

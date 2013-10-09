@@ -16,9 +16,18 @@ app.config(function ($routeProvider) {
         templateUrl: 'views/signin.html',
         controller: 'AuthCtrl'
       })
-      .when('/wcrule', {
-        templateUrl: 'views/wcRule.html'
+      .when('/rule', {
+        templateUrl: 'views/form.html',
+        controller: 'RuleCtrl'
       })      
+      .when('/edit/Rule/:id', {
+        templateUrl: 'views/edit.html', 
+        controller: 'EditCtrl'
+      })
+      .when('/new/Rule', {
+        templateUrl: 'views/edit.html',
+        controller: 'NewCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -1,11 +1,10 @@
 /**
- * Access
+ * State
  *
  * @module      :: Model
  * @description :: A short summary of how this model works and what it represents.
  *
  */
-
 
 module.exports = {
 
@@ -14,23 +13,20 @@ module.exports = {
   	/* e.g.
   	nickname: 'string'
   	*/
-    
-    user_id: {
+    state: {
         type: 'int',
-        required: 'true' 
-    },
-    mpid: {
-        type: 'string',
-        index: 'true',
-        required: 'true'
-    }, 
-    status: {
-        type: 'int',
+        max: 255,
+        min: 0,
         defaultsTo: 0
     },
-    token: {
+    name: {
         type: 'string',
-        required: 'true'
+        maxLength: 15,
+        required: true
+    },
+    rule_id: {
+        type: 'int',
+        defaultsTo: 0
     }
   }
 

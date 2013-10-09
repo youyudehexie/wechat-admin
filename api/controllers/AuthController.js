@@ -61,21 +61,15 @@ module.exports = {
         return res.send({user: {name: ''}, isLogin: false});
     } else {
         var user = req.session.user;
-        return res.send({user: {name: user.name}, isLogin: true});
+        return res.send({user: {name: user.name, id: user.id}, isLogin: true});
     }
 
   },
 
   signOut: function(req, res){
-   // console.log(req.session);
-    
- //   req.delsession();
     req.session.user = null;
-    //req.session = null;
     res.clearCookie(local.auth_cookie_name, { path: '/' });
     res.redirect(req.headers.referer || '/');
-    console.log('fuck');
-    console.log(req.session);
   },
 
   signUp: function(req, res){
@@ -100,7 +94,7 @@ module.exports = {
 
             }
             gen_session(user, req, res);         
-            return res.send({user: {name: user.name}, isExist: false})
+            return res.send({user: {name: user.name, id: user.id}, isExist: false})
         })
 
     }
@@ -115,7 +109,7 @@ module.exports = {
       } 
 
       if(user){
-        return res.send({user: {name: name}, isExist: true});
+        return res.send({user: {name: user.name, id: user.id}, isExist: true});
       } else {
         
         addUser();
@@ -145,7 +139,7 @@ module.exports = {
        
        if(user){
         gen_session(user, req, res);
-        return res.send({user: {name: user.name}, isLogin: true});
+        return res.send({user: {name: user.name, id: user.id}, isLogin: true});
        } else {
         return res.send({user: {name: ''}, isLogin: false});
        }

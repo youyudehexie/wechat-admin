@@ -1,11 +1,10 @@
 /**
- * Access
+ * Session
  *
  * @module      :: Model
  * @description :: A short summary of how this model works and what it represents.
  *
  */
-
 
 module.exports = {
 
@@ -14,24 +13,16 @@ module.exports = {
   	/* e.g.
   	nickname: 'string'
   	*/
-    
-    user_id: {
-        type: 'int',
-        required: 'true' 
-    },
-    mpid: {
+    openid: {
         type: 'string',
-        index: 'true',
-        required: 'true'
-    }, 
-    status: {
+        required: true,
+        index: true
+    },
+    state: {
         type: 'int',
         defaultsTo: 0
-    },
-    token: {
-        type: 'string',
-        required: 'true'
     }
+
   }
 
 };
