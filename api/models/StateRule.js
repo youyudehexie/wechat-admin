@@ -1,5 +1,5 @@
 /**
- * State
+ * StateRule
  *
  * @module      :: Model
  * @description :: A short summary of how this model works and what it represents.
@@ -13,16 +13,15 @@ module.exports = {
   	/* e.g.
   	nickname: 'string'
   	*/
-    name: {
-        type: 'string',
-        maxLength: 15,
-        required: true
-    },
-
-    user_id: {
+    
+   rule_id: {
+        type: 'int',
+        requied: true
+   },
+   state_id: {
         type: 'int',
         required: true
-    }
+   }
   }
 
 };

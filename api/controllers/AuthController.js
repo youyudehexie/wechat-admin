@@ -118,6 +118,7 @@ module.exports = {
   },
 
   signIn: function(req, res){
+    console.log('fuck')
     var name = req.body.name;
     var passwd = req.body.passwd;
  

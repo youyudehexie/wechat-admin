@@ -9,6 +9,7 @@ var url = require('url');
 var Wechat = require('../services/wechat'); 
 var XmlParser = require('xml2json');
 var WXSession = require('../services/wechat/session');
+var WXMessageFactory = require('../services/wechat/wxMessageFactory');
 
 module.exports = {
 
@@ -21,13 +22,11 @@ module.exports = {
   mp: function(req, res){
     var mpid = req.params.id;
 
-    console.log(req.rawBody);
     if(!mpid){
         return res.send({path: '/wechat/mp', error: 'argument error'}, 500);
     }
    
     if(req.method === 'GET'){
-        console.log(req.query);
         Access.findOne({
             mpid: mpid    
         }).done(function(err, access){
@@ -54,18 +53,62 @@ module.exports = {
         }
         catch(err){
             return res.send({path: '/wechat/mp', error: 'xml format error'}, 500); 
+        }       
+
+        var rules = [];
+        var sessionState = WXSession.get(openId);
+
+        var getRulesFromState = function(msg, stateId){
+            return StateRule.find({state_id: stateId}).then(function(stateRules){
+                return stateRules;  
+            })
+            .then(function(stateRules){
+                var result;
+                stateRules.forEach(function(stateRule){
+                    result = Rule.findOne({id: stateRule.rule_id}).then(function(rule){
+                        if(rule) rules.push(rule);
+                        return rule;
+                    }); 
+                    
+                });
+                return msg;
+            })
+            .then(function(msg){
+                var wxMessageFactory = new WXMessageFactory(msg, rules, stateId);
+                var result = wxMessageFactory.exec();
+
+                var msg = result[0];
+                var state = result[1];
+                WXSession.set(openId, state);
+
+                res.send(msg); 
+            }).fail(function(err){
+                console.log(err); 
+            })        
+        
         }
-       
 
-        var state = WXSession.get(openId);
-        if(!state){
-            WXSession.set(openId, 0); 
-            state = 0;
+        if(!sessionState){
+             
+            var access = Access.findOne({mpid: mpid})
+            .then(function(access){
+                return State.findOne({user_id: access.user_id}).then(function(state){
+                    return state; 
+                }); 
+            })
+            .then(function(state){
+                getRulesFromState(msg, state.id)
+            }, function(err){
+                console.log(err); 
+            })
+ 
+        } else {
+            console.log(sessionState)
+            getRulesFromState(msg, sessionState);
         }
 
 
-
-        return res.send(msg);
+      //  return res.send(msg);
         
     } 
      

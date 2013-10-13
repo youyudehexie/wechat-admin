@@ -34,6 +34,9 @@ module.exports = {
         type: 'string',
         defaultsTo: ''
     },
+    state: {
+        type: 'int'
+    },
     user_id: {
         type: 'int'
     }

@@ -25,11 +25,17 @@ module.exports.policies = {
         'update': 'isEditor',
         'find': 'isEditor'  
     },
-
+    StateController: {
+        '*': true 
+    },    
     AuthController: {
         '*': true 
+    },
+    WechatController: {
+        '*': true 
     }
-        /*
+
+            /*
 	// Here's an example of adding some policies to a controller
 	RabbitController: {
 

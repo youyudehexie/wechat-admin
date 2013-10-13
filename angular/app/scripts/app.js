@@ -22,11 +22,15 @@ app.config(function ($routeProvider) {
       })      
       .when('/edit/Rule/:id', {
         templateUrl: 'views/edit.html', 
-        controller: 'EditCtrl'
+        controller: 'EditRuleCtrl'
       })
       .when('/new/Rule', {
         templateUrl: 'views/edit.html',
-        controller: 'NewCtrl'
+        controller: 'NewRuleCtrl'
+      })
+      .when('/new/State', {
+        templateUrl: 'views/edit.html',
+        controller: 'NewStateCtrl'
       })
       .otherwise({
         redirectTo: '/'
