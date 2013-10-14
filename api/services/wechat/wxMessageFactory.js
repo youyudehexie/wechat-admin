@@ -81,30 +81,35 @@ WXMessageFactory.prototype.prepare = function(){
 } 
 
 WXMessageFactory.prototype.createResponse = function(rule){
-
+/*
     var defaultRule = function(rules, state){
         var length = rules.length; 
         for(var i = 0; i < length; i++){
             if(rules[i].state == state){
-                console.log(rules[i]);
                 return rules[i]; 
             } 
         }
     }
-    console.log(this.state);
 
     if(!rule){
         var rule = defaultRule(this.rules, this.state)     
     }
-
+*/
+//    console.log(this.msg);
+    var action = rule.action || this.msg.Content; 
     var msg = "" +
       "<xml>" +
-      "<ToUserName><![CDATA[" + this.msg.ToUserName + "]]></ToUserName>" +
-      "<FromUserName><![CDATA[" + this.msg.FromUserName + "]]></FromUserName>" +
+      "<ToUserName><![CDATA[" + this.msg.FromUserName + "]]></ToUserName>" + 
+      "<FromUserName><![CDATA[" + this.msg.ToUserName + "]]></FromUserName>" +
       "<CreateTime>" + parseInt(Date.now()/1000) + "</CreateTime>" +
       "<MsgType><![CDATA[text]]></MsgType>" +
-      "<Content><![CDATA[" + rule.action + "]]></Content>"
+      "<Content><![CDATA[" + rule.action + "]]></Content>" + 
+      "</xml>"
 
-    return [msg, rule.state];
+    var wxsession = {}
+    wxsession.msg = msg;
+    wxsession.state = rule.state;
+    wxsession.action = rule.action;
+    return wxsession;
 }
 module.exports = WXMessageFactory;

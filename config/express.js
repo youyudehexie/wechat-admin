@@ -1,4 +1,3 @@
-var parseString = require('xml2js').parseString;
 var Buffer = require('buffer');
 
 var mime = function(req){

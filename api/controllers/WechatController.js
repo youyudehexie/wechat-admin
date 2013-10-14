@@ -56,7 +56,7 @@ module.exports = {
         }       
 
         var rules = [];
-        var sessionState = WXSession.get(openId);
+        var sessionState = WXSession.get(openId); 
 
         var getRulesFromState = function(msg, stateId){
             return StateRule.find({state_id: stateId}).then(function(stateRules){
@@ -75,13 +75,11 @@ module.exports = {
             })
             .then(function(msg){
                 var wxMessageFactory = new WXMessageFactory(msg, rules, stateId);
-                var result = wxMessageFactory.exec();
+                var wxsession = wxMessageFactory.exec();
 
-                var msg = result[0];
-                var state = result[1];
-                WXSession.set(openId, state);
+                WXSession.set(openId, wxsession);
 
-                res.send(msg); 
+                res.send(wxsession); 
             }).fail(function(err){
                 console.log(err); 
             })        
@@ -103,7 +101,6 @@ module.exports = {
             })
  
         } else {
-            console.log(sessionState)
             getRulesFromState(msg, sessionState);
         }
 
