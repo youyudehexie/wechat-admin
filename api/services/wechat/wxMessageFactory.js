@@ -77,11 +77,10 @@ WXMessageFactory.prototype.prepare = function(){
     for(var i=0; i < length; i++){
         ruleFactory.registerRule(new Rule(rules[i])); 
     }
-
 } 
 
 WXMessageFactory.prototype.createResponse = function(rule){
-/*
+
     var defaultRule = function(rules, state){
         var length = rules.length; 
         for(var i = 0; i < length; i++){
@@ -94,9 +93,7 @@ WXMessageFactory.prototype.createResponse = function(rule){
     if(!rule){
         var rule = defaultRule(this.rules, this.state)     
     }
-*/
-//    console.log(this.msg);
-    var action = rule.action || this.msg.Content; 
+
     var msg = "" +
       "<xml>" +
       "<ToUserName><![CDATA[" + this.msg.FromUserName + "]]></ToUserName>" + 
@@ -109,7 +106,6 @@ WXMessageFactory.prototype.createResponse = function(rule){
     var wxsession = {}
     wxsession.msg = msg;
     wxsession.state = rule.state;
-    wxsession.action = rule.action;
     return wxsession;
 }
 module.exports = WXMessageFactory;

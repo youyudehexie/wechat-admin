@@ -76,10 +76,8 @@ module.exports = {
             .then(function(msg){
                 var wxMessageFactory = new WXMessageFactory(msg, rules, stateId);
                 var wxsession = wxMessageFactory.exec();
-
                 WXSession.set(openId, wxsession);
-
-                res.send(wxsession); 
+                res.send(wxsession.msg); 
             }).fail(function(err){
                 console.log(err); 
             })        
@@ -101,11 +99,8 @@ module.exports = {
             })
  
         } else {
-            getRulesFromState(msg, sessionState);
+            getRulesFromState(msg, sessionState.state);
         }
-
-
-      //  return res.send(msg);
         
     } 
      
